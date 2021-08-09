@@ -22,6 +22,13 @@ Posteriormente se procede en R a unir los archivos para obtener las columnas de 
 > f1_f2 <- merge(f1_aureus, f2_aureus, by="wound_sub")
 > f1_f2_f3 <- merge(f1_f2, f3_aureus, by="ID_patient")
 > write.table(f1_f2_f3, "final_merged_aureus", sep=",")
+
+$ awk 'BEGIN{FS=OFS=","}($10 == "cat_1" || $10 == "cat_3"){print $0, $2"/"$4}' final_merged_aureus.csv > final_merged_aureus_cat1_cat3.csv
+$ awk 'BEGIN{FS=OFS=","}($12 != "RDEB"){print $0}' final_merged_aureus_cat1_cat3.csv > final_merged_aureus_cat1_cat3_JEB.csv 
+$ awk 'BEGIN{FS=OFS=","}($12 != "JEB"){print $0}' final_merged_aureus_cat1_cat3.csv > final_merged_aureus_cat1_cat3_RDEB.csv 
+$ awk 'BEGIN{FS=OFS=","}($10 != "cat_1"){print $0}' final_merged_aureus_cat1_cat3.csv > final_merged_aureus_cat3.csv 
+$ awk 'BEGIN{FS=OFS=","}($10 != "cat_3"){print $0}' final_merged_aureus_cat1_cat3.csv > final_merged_aureus_cat1.csv
+
 > aureus <- read.delim("final_merged_aureus_cat1_cat3.csv", sep=",", header=T)
 > aureus_all <- ggplot(aureus, aes(x = wound_sub_visit, y = Type_patient))+geom_point(size=2, aes(shape=category_sub_wounds, color=Interpretacion))+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size=6, face="bold"))+facet_grid(Antibiotico~Age, scale="free_x", space="free_x")+labs(title="Resistencias Pseudomonas aeruginosa")+scale_colour_manual(values=c("green","red","blue"))+scale_shape_manual(values=c(19,4))
 > aureus_JEB <- read.delim("final_merged_aureus_cat1_cat3_JEB.csv", sep=",", header=T)
@@ -32,3 +39,28 @@ Posteriormente se procede en R a unir los archivos para obtener las columnas de 
 > aureus_cat1 <- ggplot(aureus_cat1, aes(x = wound_sub_visit, y = Antibiotico))+geom_point(size=4, aes(color=Interpretacion))+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size=6, face="bold"))+facet_grid(Type_patient~Age, scale="free_x", space="free_x")+labs(title="Resistencias Pseudomonas aeruginosa - Category 1")+scale_colour_manual(values=c("green","red","blue"))+scale_shape_manual(values=c(19,4))
 > aureus_plot_RDEB <- ggplot(aureus_RDEB, aes(x = wound_sub_visit, y = Antibiotico))+geom_point(size=4, aes(color=Interpretacion))+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size=6, face="bold"))+facet_grid(category_sub_wounds~Age, scale="free_x", space="free_x")+labs(title="Resistencias Pseudomonas aeruginosa - RDEB")+scale_colour_manual(values=c("red","blue"))+scale_shape_manual(values=c(19,4))
 > aureus_plot_JEB <- ggplot(aureus_JEB, aes(x = wound_sub_visit, y = Antibiotico))+geom_point(size=5, aes(color=Interpretacion))+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size=6, face="bold"))+facet_grid(category_sub_wounds~Age, scale="free_x", space="free_x")+labs(title="Resistencias Pseudomonas aeruginosa - JEB")+scale_colour_manual(values=c("green","red","blue"))+scale_shape_manual(values=c(19,4))
+
+
+### Pseudomonas aeruginosa ###
+
+> f1_pseudomonas <- read.delim("psudomonas", sep=",", header=T)
+> f1_f2 <- merge(f1_pseudomonas, f2_aureus, by="wound_sub")
+> f1_f2_f3 <- merge(f1_f2, f3_aureus, by="ID_patient")
+> write.table(f1_f2_f3, "final_merged_pseudomonas", sep=",")
+
+$ awk 'BEGIN{FS=OFS=","}($10 == "cat_1" || $10 == "cat_3"){print $0, $2"/"$4}' final_merged_pseudomonas.csv > final_merged_pseudomonas_cat1_cat3.csv
+$ awk 'BEGIN{FS=OFS=","}($12 != "RDEB"){print $0}' final_merged_pseudomonas_cat1_cat3.csv > final_merged_pseudomonas_cat1_cat3_JEB.csv 
+$ awk 'BEGIN{FS=OFS=","}($12 != "JEB"){print $0}' final_merged_pseudomonas_cat1_cat3.csv > final_merged_pseudomonas_cat1_cat3_RDEB.csv 
+$ awk 'BEGIN{FS=OFS=","}($10 != "cat_1"){print $0}' final_merged_pseudomonas_cat1_cat3.csv > final_merged_pseudomonas_cat3.csv 
+$ awk 'BEGIN{FS=OFS=","}($10 != "cat_2"){print $0}' final_merged_pseudomonas_cat1_cat3.csv > final_merged_pseudomonas_cat1.csv 
+
+> pseudomonas <- read.delim("final_merged_pseudomonas_cat1_cat3.csv", sep=",", header=T)
+> pseudomonas_all <- ggplot(pseudomonas, aes(x = wound_sub_visit, y = Type_patient))+geom_point(size=2, aes(shape=category_sub_wounds, color=Interpretacion))+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size=6, face="bold"))+facet_grid(Antibiotico~Age, scale="free_x", space="free_x")+labs(title="Resistencias Pseudomonas aeruginosa")+scale_colour_manual(values=c("red","blue"))+scale_shape_manual(values=c(19,4))
+> pseudomonas_JEB <- read.delim("final_merged_pseudomonas_cat1_cat3_JEB.csv", sep=",", header=T)
+> pseudomonas_RDEB <- read.delim("final_merged_pseudomonas_cat1_cat3_RDEB.csv", sep=",", header=T)
+> pseudomonas_cat1 <- read.delim("final_merged_pseudomonas_cat1.csv", sep=",", header=T)
+> pseudomonas_cat3 <- read.delim("final_merged_pseudomonas_cat3.csv", sep=",", header=T)
+> pseudomonas_plot_cat3 <- ggplot(pseudomonas_cat3, aes(x = wound_sub_visit, y = Antibiotico))+geom_point(size=4, aes(color=Interpretacion))+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size=6, face="bold"))+facet_grid(Type_patient~Age, scale="free_x", space="free_x")+labs(title="Resistencias Pseudomonas aeruginosa - Category 3")+scale_colour_manual(values=c("red","blue"))+scale_shape_manual(values=c(19,4)) 
+> pseudomonas_plot_cat1 <- ggplot(pseudomonas_cat1, aes(x = wound_sub_visit, y = Antibiotico))+geom_point(size=4, aes(color=Interpretacion))+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size=6, face="bold"))+facet_grid(Type_patient~Age, scale="free_x", space="free_x")+labs(title="Resistencias Pseudomonas aeruginosa - Category 1")+scale_colour_manual(values=c("red","blue"))+scale_shape_manual(values=c(19,4)) 
+> pseudomonas_plot_JEB <- ggplot(pseudomonas_JEB, aes(x = wound_sub_visit, y = Antibiotico))+geom_point(size=4, aes(color=Interpretacion))+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size=6, face="bold"))+facet_grid(category_sub_wounds~Age, scale="free_x", space="free_x")+labs(title="Resistencias Pseudomonas aeruginosa - JEB")+scale_colour_manual(values=c("red","blue"))+scale_shape_manual(values=c(19,4)) 
+> pseudomonas_plot_RDEB <- ggplot(pseudomonas_RDEB, aes(x = wound_sub_visit, y = Antibiotico))+geom_point(size=4, aes(color=Interpretacion))+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size=6, face="bold"))+facet_grid(category_sub_wounds~Age, scale="free_x", space="free_x")+labs(title="Resistencias Pseudomonas aeruginosa - RDEB")+scale_colour_manual(values=c("red","blue"))+scale_shape_manual(values=c(19,4)) 
