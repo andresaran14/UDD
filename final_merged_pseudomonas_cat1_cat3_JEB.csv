@@ -1,0 +1,21 @@
+ID_patient,wound_sub,visit,wound,Norden,org,Antibiotico,Interpretacion,category_sub_wounds,Age,Type_patient,wound_sub_visit
+4,04_01_01,0,1,11714340,Pseudomonas aeruginosa,Ciprofloxacino,Sensible,cat_1,25,RDEB,04_01_01/0
+4,04_01_01,0,1,11714340,Pseudomonas aeruginosa,Meropenem,Sensible,cat_1,25,RDEB,04_01_01/0
+4,04_01_01,3,1,11959498,Pseudomonas aeruginosa,Ciprofloxacino,Sensible,cat_1,25,RDEB,04_01_01/3
+4,04_01_01,3,1,11959498,Pseudomonas aeruginosa,Meropenem,Sensible,cat_1,25,RDEB,04_01_01/3
+4,04_04_01,0,4,11714343,Pseudomonas aeruginosa,Ciprofloxacino,Sensible,cat_3,25,RDEB,04_04_01/0
+4,04_04_01,0,4,11714343,Pseudomonas aeruginosa,Meropenem,Sensible,cat_3,25,RDEB,04_04_01/0
+5,05_01_01,0,1,11739820,Pseudomonas aeruginosa,Ciprofloxacino,Resistente,cat_1,23,RDEB,05_01_01/0
+5,05_01_01,0,1,11739820,Pseudomonas aeruginosa,Meropenem,Sensible,cat_1,23,RDEB,05_01_01/0
+5,05_02_01,0,2,11739821,Pseudomonas aeruginosa,Ciprofloxacino,Resistente,cat_1,23,RDEB,05_02_01/0
+5,05_02_01,0,2,11739821,Pseudomonas aeruginosa,Meropenem,Sensible,cat_1,23,RDEB,05_02_01/0
+5,05_02_01,6,2,12251436,Pseudomonas aeruginosa,Ciprofloxacino,Resistente,cat_1,23,RDEB,05_02_01/6
+5,05_02_01,6,2,12251436,Pseudomonas aeruginosa,Meropenem,Sensible,cat_1,23,RDEB,05_02_01/6
+5,05_03_01,3,3,12000010,Pseudomonas aeruginosa,Ciprofloxacino,Resistente,cat_3,23,RDEB,05_03_01/3
+5,05_03_01,3,3,12000010,Pseudomonas aeruginosa,Meropenem,Sensible,cat_3,23,RDEB,05_03_01/3
+5,05_04_01,0,4,11739823,Pseudomonas aeruginosa,Ciprofloxacino,Resistente,cat_3,23,RDEB,05_04_01/0
+5,05_04_01,0,4,11739823,Pseudomonas aeruginosa,Meropenem,Sensible,cat_3,23,RDEB,05_04_01/0
+6,06_03_01,0,3,11760432,Pseudomonas aeruginosa,Ciprofloxacino,Sensible,cat_3,6,JEB,06_03_01/0
+6,06_03_01,0,3,11760432,Pseudomonas aeruginosa,Meropenem,Sensible,cat_3,6,JEB,06_03_01/0
+6,06_04_01,0,4,11760423,Pseudomonas aeruginosa,Ciprofloxacino,Sensible,cat_3,6,JEB,06_04_01/0
+6,06_04_01,0,4,11760423,Pseudomonas aeruginosa,Meropenem,Sensible,cat_3,6,JEB,06_04_01/0
