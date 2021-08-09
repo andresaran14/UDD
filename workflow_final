@@ -1,0 +1,34 @@
+Desde el archivo antibiograma_pacientes_completo.csv se extraen sólo aquellas líneas que correspondan a Staphylococcus aureus o Pseudomonas aeruginosa mendiante:
+
+$ grep "Staphylococcus aureus" antibiograma_pacientes_completo.csv > aureus.csv
+$ grep "Pseudomonas aeruginosa" antibiograma_pacientes_completo.csv > pseudomonas.csv
+
+Se eliminan las columnas que no se requieren, dejando solamente las siguientes:
+
+ID_pactient	visit	wound	wound_sub	Norden	org	Antibiotico	Interpretacion
+
+La columna de wound_sub se crea manualmente con los datos extraídos del archivo stage_patients_debra_Dic2020v2.csv
+
+Posteriormente se procede en R a unir los archivos para obtener las columnas de interés.
+
+#R
+
+### Staphylococcus aureus ###
+
+> library(ggplot2)
+> f1_aureus <- read.delim("aureus.csv", sep=",", header=T)
+> f2_aureus <- read.delim("nwounds.csv", sep=",", header=T)
+> f3_aureus <- read.delim("patients_type_age_uniq.csv", sep=",", header=T)
+> f1_f2 <- merge(f1_aureus, f2_aureus, by="wound_sub")
+> f1_f2_f3 <- merge(f1_f2, f3_aureus, by="ID_patient")
+> write.table(f1_f2_f3, "final_merged_aureus", sep=",")
+> aureus <- read.delim("final_merged_aureus_cat1_cat3.csv", sep=",", header=T)
+> aureus_all <- ggplot(aureus, aes(x = wound_sub_visit, y = Type_patient))+geom_point(size=2, aes(shape=category_sub_wounds, color=Interpretacion))+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size=6, face="bold"))+facet_grid(Antibiotico~Age, scale="free_x", space="free_x")+labs(title="Resistencias Pseudomonas aeruginosa")+scale_colour_manual(values=c("green","red","blue"))+scale_shape_manual(values=c(19,4))
+> aureus_JEB <- read.delim("final_merged_aureus_cat1_cat3_JEB.csv", sep=",", header=T)
+> aureus_RDEB <- read.delim("final_merged_aureus_cat1_cat3_RDEB.csv", sep=",", header=T)
+> aureus_cat1 <- read.delim("final_merged_aureus_cat1.csv", sep=",", header=T)
+> aureus_cat3 <- read.delim("final_merged_aureus_cat3.csv", sep=",", header=T)
+> aureus_plot_cat3 <- ggplot(aureus_cat3, aes(x = wound_sub_visit, y = Antibiotico))+geom_point(size=4, aes(color=Interpretacion))+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size=6, face="bold"))+facet_grid(Type_patient~Age, scale="free_x", space="free_x")+labs(title="Resistencias Pseudomonas aeruginosa - Category 3")+scale_colour_manual(values=c("red","blue"))+scale_shape_manual(values=c(19,4)) 
+> aureus_cat1 <- ggplot(aureus_cat1, aes(x = wound_sub_visit, y = Antibiotico))+geom_point(size=4, aes(color=Interpretacion))+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size=6, face="bold"))+facet_grid(Type_patient~Age, scale="free_x", space="free_x")+labs(title="Resistencias Pseudomonas aeruginosa - Category 1")+scale_colour_manual(values=c("green","red","blue"))+scale_shape_manual(values=c(19,4))
+> aureus_plot_RDEB <- ggplot(aureus_RDEB, aes(x = wound_sub_visit, y = Antibiotico))+geom_point(size=4, aes(color=Interpretacion))+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size=6, face="bold"))+facet_grid(category_sub_wounds~Age, scale="free_x", space="free_x")+labs(title="Resistencias Pseudomonas aeruginosa - RDEB")+scale_colour_manual(values=c("red","blue"))+scale_shape_manual(values=c(19,4))
+> aureus_plot_JEB <- ggplot(aureus_JEB, aes(x = wound_sub_visit, y = Antibiotico))+geom_point(size=5, aes(color=Interpretacion))+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size=6, face="bold"))+facet_grid(category_sub_wounds~Age, scale="free_x", space="free_x")+labs(title="Resistencias Pseudomonas aeruginosa - JEB")+scale_colour_manual(values=c("green","red","blue"))+scale_shape_manual(values=c(19,4))
