@@ -101,4 +101,9 @@ a_plot_cat1_RDEB <- ggplot(a_cat1_RDEB, aes(x = wound_sub_visit, y = Antibiotico
 > ggsave("aureus_cat1_JEB.pdf", a_plot_cat1_JEB, width=12, heigh=8)
 > ggsave("aureus_cat3_JEB.pdf", a_plot_cat3_JEB, width=12, heigh=8)
 
+################################### Bar Plots ###################################
 
+$ cat final_merged_aureus.csv final_merged_pseudomonas.csv > final_merged_all.csv
+$ awk 'BEGIN{FS=OFS=","}($9=="cat_1"  || $9 == "cat_3"){print $0}' final_merged_all.csv > final_merged_all_cat1_cat3.csv 
+
+> test_bar <- read.delim("final_merged_all_cat1_cat3.csv", sep=",", header=T)
