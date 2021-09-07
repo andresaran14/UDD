@@ -106,4 +106,8 @@ a_plot_cat1_RDEB <- ggplot(a_cat1_RDEB, aes(x = wound_sub_visit, y = Antibiotico
 $ cat final_merged_aureus.csv final_merged_pseudomonas.csv > final_merged_all.csv
 $ awk 'BEGIN{FS=OFS=","}($9=="cat_1"  || $9 == "cat_3"){print $0}' final_merged_all.csv > final_merged_all_cat1_cat3.csv 
 
-> test_bar <- read.delim("final_merged_all_cat1_cat3.csv", sep=",", header=T)
+> all_cat1_cat3 <- read.delim("final_merged_all_cat1_cat3.csv", sep=",", header=T)
+> tipo_all_plot <- ggplot(all_cat1_cat3, aes(x=Antibiotico, group=Interpretacion))+geom_bar(aes(y=..count.., fill=Interpretacion),stat="count")+geom_text(aes(y=..count.., label=..count.. ),stat= "count", position = position_stack(vjust=0.5))+labs(y="Amount",fill="Interpretación")+scale_y_continuous(limits=c(0,80))+facet_grid(Type_patient~org,scale="free_x", space="free_x")+scale_fill_manual(values=c("greenyellow", "red3","deepskyblue3"))+labs(title="Resistencias Antibióticos Tipo Paciente")
+
+
+
